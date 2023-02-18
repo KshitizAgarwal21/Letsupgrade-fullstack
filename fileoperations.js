@@ -34,5 +34,3 @@ fs.open("myfile.txt", "w", (err, file) => {
     console.log(err);
   }
 });
-
-fs.writeFile();
