@@ -31,7 +31,7 @@ mongoose.connect(
 // app.use("/test", signup);
 
 app.post("/register", async (req, res) => {
-  var user_exists = await REGISTER_SCHEMA.find({});
+  var user_exists = await REGISTER_SCHEMA.find({ email: req.body.email });
   console.log(user_exists);
   if (user_exists) {
     res.status(200).send({ msg: "email id already exist is database" });
@@ -55,7 +55,21 @@ app.post("/register", async (req, res) => {
     }
   }
 });
+
+app.post("/updatepassword", async (req, res) => {
+  var valid_email = await REGISTER_SCHEMA.findOne({ email: req.body.email });
+
+  if (valid_email) {
+    var update_password = await REGISTER_SCHEMA.findOneAndUpdate(
+      { email: req.body.email },
+      { $set: { password: req.body.password } }
+    );
+    console.log(update_password);
+  }
+});
+
 //CRUD
 
 //Create
 //Read
+//Update
