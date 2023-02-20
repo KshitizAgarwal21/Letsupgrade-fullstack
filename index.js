@@ -68,6 +68,14 @@ app.post("/updatepassword", async (req, res) => {
   }
 });
 
+app.post("/deleteid", async (req, res) => {
+  // var deleted = await REGISTER_SCHEMA.remove({ email: req.body.email });
+  var newdeletedmethod = await REGISTER_SCHEMA.deleteOne({
+    email: req.body.email,
+  });
+
+  console.log(newdeletedmethod);
+});
 //CRUD
 
 //Create
